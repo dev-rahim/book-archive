@@ -4,12 +4,16 @@ const searchFound = document.getElementById('searchFound');
 // load data from api 
 const loadBooksInfo = () => {
     const searchInput = document.getElementById('searchInput');
-    fetch(`https://openlibrary.org/search.json?q=${searchInput.value}`)
-        .then(res => res.json())
-        .then(data => getBooksInfo(data))
+    if (searchInput.value) {
+        fetch(`https://openlibrary.org/search.json?q=${searchInput.value}`)
+            .then(res => res.json())
+            .then(data => getBooksInfo(data))
+        searchFound.textContent = '';
+        searchResults.textContent = '';
+    } else {
+        searchFound.innerText = `Invalid input`;
+    }
     searchInput.value = '';
-    searchFound.textContent = '';
-    searchResults.textContent = '';
 }
 // get books info 
 const getBooksInfo = (data) => {
