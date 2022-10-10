@@ -1,10 +1,24 @@
 const searchResults = document.getElementById('searchResults');
 const searchFound = document.getElementById('searchFound');
 
+// Get the input field
+const searchInput = document.getElementById("searchInput");
+
+// Execute a function when the user presses a key on the keyboard
+searchInput.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("searchButton").click();
+    }
+});
+
 // load data from api 
 const loadBooksInfo = () => {
 
-    const searchInput = document.getElementById('searchInput');
+    // const searchInput = document.getElementById('searchInput');
 
     if (searchInput.value) {
         fetch(`https://openlibrary.org/search.json?q=${searchInput.value}`)
